@@ -68,7 +68,8 @@ def get_break_continue_node(node):
     return break_nodes, continue_nodes
 
 def get_edge(in_nodes):
-    edge = []       # 如果是普通的语句
+    # 输入入节点，返回入边的列表，边为(parent_id, label)
+    edge = []     
     for in_node in in_nodes:    
         parent, label = in_node
         parent_id = parent['id']
@@ -197,7 +198,7 @@ class CFG(AST):
         return cfg
 
     def init_graph(self, cfg):
-        # 输入代码，转换为CFG之后，返回更抽象的图，由节点V，边E和头节点r组成，其中添加了一条exit节点，将return语句和函数定义节点连接到exit节点
+        # 输入CFG，返回反向CFG图，由节点V，边E和头节点r组成，其中添加了一条exit节点，将return语句和函数定义节点连接到exit节点
         Graph = []
         func_num = 0
         for func_cfg in cfg:

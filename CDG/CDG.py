@@ -132,12 +132,11 @@ class CDG(CFG):
                                 tree.parent[v] = tree.get_lca(u, parent_v)
                                 changed = True
             tree.reset_by_parent()  # 根据parent字典重置children字典
-            tree.see_tree()
             PDT.append(tree)
         return PDT
 
     def dominance_frontier(self, code):
-        # 代码，返回CFG、后支配树和支配边界
+        # 输入代码，返回CFG和支配边界
         cfg = self.see_cfg(code)
         graphs = self.init_graph(cfg)  # 将CFG转换为更抽象的图
         prev = self.get_prev(graphs)  # 计算每个节点的前驱节点

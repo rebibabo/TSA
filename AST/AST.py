@@ -71,8 +71,6 @@ if __name__ == '__main__':
     code = '''
     int main(){
         int abc = 1;
-        int b = 2;
-        int c = a + b;
         while(i<10){
             i++;
         }
