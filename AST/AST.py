@@ -18,6 +18,14 @@ def traverse_tree(node, i=[0], parent_i=[0]):     # python递归函数想要修�
         result += traverse_tree(child, i, parent_i)
     return result
 
+def tokenize_help(node, tokens):
+    # 遍历整个AST树，返回符合func的节点列表results
+    if not node.children:
+        tokens.append(text(node))
+        return
+    for n in node.children:
+        tokenize_help(n, tokens)
+
 class AST:
     def __init__(self, language):
         self.language = language
@@ -52,6 +60,13 @@ class AST:
         if pdf:
             dot.render(filename, view=view, cleanup=True)
 
+    def tokenize(self, code):
+        tree = self.parser.parse(bytes(code, 'utf8'))
+        root_node = tree.root_node
+        tokens = []
+        tokenize_help(root_node, tokens)
+        return tokens
+
 if __name__ == '__main__':
     code = '''
     int main(){
@@ -64,4 +79,5 @@ if __name__ == '__main__':
     }
     '''
     ast = AST('c')
+    print(ast.tokenize(code))
     ast.see_tree(code, view=True)
