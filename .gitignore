@@ -1,0 +1,8 @@
+.vscode
+__pycache__
+build
+*.pdf
+*.txt
+*.gv
+tree-sitter*
+algorithm.md
